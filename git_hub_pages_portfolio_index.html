@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Name – Data Portfolio</title>
+  <meta name="description" content="Data science & analytics portfolio – projects, writeups, and links." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0d12;
+      --panel: #121725;
+      --text: #f2f5ff;
+      --muted: #a8b3cf;
+      --accent: #7c9cff;
+      --accent-2: #00d2d3; /* subtle second accent */
+      --card: #141a2e;
+      --border: #1d2540;
+      --badge: #1e2a4a;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    :root.light {
+      --bg: #f7f8ff;
+      --panel: #ffffff;
+      --text: #0b0d12;
+      --muted: #475070;
+      --accent: #355cff;
+      --accent-2: #00baba;
+      --card: #ffffff;
+      --border: #e8ecff;
+      --badge: #eef2ff;
+      --shadow: 0 10px 30px rgba(17, 24, 39, .08);
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, var(--bg), #0b0d12 280px) fixed;
+      color: var(--text);
+      font: 16px/1.6 Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Layout */
+    .wrap { max-width: 1050px; margin: 0 auto; padding: 24px; }
+    header.site {
+      display: grid; grid-template-columns: 80px 1fr auto; gap: 18px; align-items: center;
+      background: linear-gradient(145deg, var(--panel), rgba(124,156,255,.08));
+      border: 1px solid var(--border); border-radius: 18px; padding: 18px 18px; box-shadow: var(--shadow);
+    }
+    .avatar { width: 64px; height: 64px; border-radius: 16px; background: var(--card); display:flex; align-items:center; justify-content:center; border:1px solid var(--border); font-weight:700; color: var(--accent-2); }
+    .title h1 { margin: 0 0 4px; font-size: 24px; letter-spacing: .2px; }
+    .title p { margin: 0; color: var(--muted); font-size: 14px; }
+    .actions { display:flex; gap: 10px; }
+    .btn { display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius: 12px; border:1px solid var(--border); background: var(--card); color: var(--text); text-decoration:none; font-weight:600; box-shadow: var(--shadow); }
+    .btn:hover { transform: translateY(-1px); }
+    .toggle { cursor:pointer; }
+
+    /* Filters */
+    .controls { margin-top: 18px; display:flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    .search { flex:1 1 280px; }
+    .search input { width: 100%; padding: 12px 14px; border-radius: 12px; border:1px solid var(--border); background: var(--card); color: var(--text); }
+    .chips { display:flex; gap: 8px; flex-wrap: wrap; }
+    .chip { padding: 8px 12px; border-radius: 999px; background: var(--badge); border:1px solid var(--border); color: var(--muted); cursor: pointer; user-select:none; font-weight:600; font-size: 13px; }
+    .chip.active { background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%); color: white; border-color: transparent; }
+
+    /* Grid */
+    .grid { display:grid; gap: 16px; grid-template-columns: repeat(12, 1fr); margin-top: 20px; }
+    .card { grid-column: span 12; background: linear-gradient(180deg, var(--card), rgba(124,156,255,.06)); border:1px solid var(--border); border-radius: 18px; padding: 18px; box-shadow: var(--shadow); display:grid; grid-template-columns: 1fr auto; gap: 12px; }
+    @media (min-width: 720px) { .card { grid-column: span 6; } }
+    @media (min-width: 980px) { .card { grid-column: span 4; } }
+    .card h3 { margin: 0 0 6px; font-size: 18px; }
+    .card p { margin: 0 0 10px; color: var(--muted); font-size: 14px; }
+    .badges { display:flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
+    .badge { background: var(--badge); border:1px solid var(--border); color: var(--muted); padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+    .links { display:flex; gap: 8px; align-items:center; }
+    .link { font-weight: 700; }
+
+    footer { opacity: .8; color: var(--muted); font-size: 13px; margin: 20px 0 60px; text-align:center; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="site">
+      <div class="avatar" aria-hidden="true">YN</div>
+      <div class="title">
+        <h1>Your Name</h1>
+        <p>Data Science • Business Analytics • Machine Learning</p>
+      </div>
+      <div class="actions">
+        <a class="btn" href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="mailto:you@email.com">Contact</a>
+        <button class="btn toggle" id="modeToggle" title="Toggle light/dark">Light</button>
+      </div>
+    </header>
+
+    <section class="controls" aria-label="Filters and search">
+      <div class="search">
+        <input id="search" type="search" placeholder="Search projects by title, tech, or keywords…" aria-label="Search projects" />
+      </div>
+      <div class="chips" id="chipBar"></div>
+    </section>
+
+    <section class="grid" id="grid" aria-live="polite"></section>
+
+    <footer>
+      © <span id="year"></span> Your Name. Built with plain HTML/CSS/JS and hosted on GitHub Pages.
+    </footer>
+  </div>
+
+  <script>
+    // ——— Configuration: edit this to personalize ———
+    const PROFILE = {
+      initials: "AH",
+      name: "Armin Heldovac",
+      tagline: "Data Science • Business Analytics • Visualization",
+      github: "https://github.com/yourusername", // TODO: replace with your real username
+      email: "your.email@example.com",
+      startLight: false,
+    };
+
+    // Project catalog. Add/edit items here.
+    // tip: tags power filtering; keep them short (e.g., Python, SQL, NLP)
+    const PROJECTS = [
+      {
+        title: "Childcare Pricing Analysis",
+        summary: "Explored 2008–2022 childcare costs across states/counties; built interactive dashboard and infographic highlighting affordability gaps and cost drivers by age group and provider type.",
+        tags: ["Power BI", "ETL", "Visualization", "Public Policy"],
+        links: {
+          repo: "https://github.com/yourusername/childcare-pricing-analysis",
+          demo: "",
+          writeup: "./assets/childcare-pricing-analysis.pdf"
+        }
+      },
+      {
+        title: "Housing Affordability in the U.S.",
+        summary: "Combined Zillow prices with income/rent data; descriptive + predictive modeling (regression, time series) to assess affordability and forecast trends by state.",
+        tags: ["Python", "Regression", "Time Series", "Kaggle", "Finance"],
+        links: {
+          repo: "https://github.com/yourusername/housing-affordability",
+          demo: "",
+          writeup: "./assets/housing-affordability.pdf"
+        }
+      },
+      {
+        title: "Lung Cancer Risk Prediction",
+        summary: "Built screening-oriented classifiers (LogReg, Random Forest, KNN) on survey features; emphasized high recall and ROC-AUC for early-detection use cases.",
+        tags: ["Healthcare", "Classification", "Scikit-learn", "Model Evaluation"],
+        links: {
+          repo: "https://github.com/yourusername/lung-cancer-risk",
+          demo: "",
+          writeup: "./assets/lung-cancer-project.pdf"
+        }
+      },
+      {
+        title: "Rise in Kia & Hyundai Thefts",
+        summary: "Public-safety visuals (R/ggplot2) analyzing brand share, geography, temporal spikes, and city risk; actionable prevention guidance.",
+        tags: ["R", "Visualization", "Crime Data", "Storytelling"],
+        links: {
+          repo: "https://github.com/yourusername/kia-hyundai-thefts",
+          demo: "",
+          writeup: "./assets/kia-hyundai-thefts.pdf"
+        }
+      }
+    ];
+
+    // ——— Runtime logic ———
+    const grid = document.getElementById('grid');
+    const chipBar = document.getElementById('chipBar');
+    const search = document.getElementById('search');
+
+    // populate header
+    document.querySelector('.avatar').textContent = PROFILE.initials;
+    document.querySelector('.title h1').textContent = PROFILE.name;
+    document.querySelector('.title p').textContent = PROFILE.tagline;
+    document.querySelector('.actions a.btn').href = PROFILE.github;
+    document.querySelector('.actions a.btn + a.btn').href = `mailto:${PROFILE.email}`;
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // light/dark toggle
+    const modeBtn = document.getElementById('modeToggle');
+    const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+    const startLight = PROFILE.startLight || prefersLight;
+    const applyMode = (light) => {
+      document.documentElement.classList.toggle('light', light);
+      modeBtn.textContent = light ? 'Dark' : 'Light';
+      localStorage.setItem('mode', light ? 'light' : 'dark');
+    }
+    applyMode(localStorage.getItem('mode') === 'light' ? true : startLight);
+    modeBtn.addEventListener('click', () => applyMode(!document.documentElement.classList.contains('light')));
+
+    // chips from unique tags
+    const allTags = Array.from(new Set(PROJECTS.flatMap(p => p.tags))).sort();
+    const state = { tag: 'All', query: '' };
+
+    const renderChips = () => {
+      chipBar.innerHTML = '';
+      const make = (label) => {
+        const b = document.createElement('button');
+        b.className = 'chip' + (state.tag === label ? ' active' : '');
+        b.textContent = label;
+        b.addEventListener('click', () => { state.tag = label; render(); });
+        chipBar.appendChild(b);
+      };
+      make('All');
+      allTags.forEach(make);
+    };
+
+    const matches = (p) => {
+      const q = state.query.trim().toLowerCase();
+      const hitQ = !q || [p.title, p.summary, ...(p.tags||[])].join(' ').toLowerCase().includes(q);
+      const hitT = state.tag === 'All' || (p.tags||[]).includes(state.tag);
+      return hitQ && hitT;
+    };
+
+    const linkIcon = (label) => {
+      const icons = { repo: 'M10 2a8 8 0 00-2.53 15.6c.4.07.55-.17.55-.38v-1.33c-2.25.49-2.72-1.08-2.72-1.08-.36-.9-.88-1.14-.88-1.14-.72-.5.05-.49.05-.49.8.06 1.22.84 1.22.84.71 1.21 1.86.86 2.31.66.07-.52.28-.86.5-1.06-1.8-.2-3.69-.9-3.69-4a3.13 3.13 0 01.83-2.16 2.9 2.9 0 01.08-2.13s.68-.22 2.23.82c.65-.18 1.35-.27 2.05-.27.7 0 1.4.09 2.05.27 1.55-1.04 2.23-.82 2.23-.82.16.52.16 1.1.08 1.63.53.59.83 1.35.83 2.16 0 3.11-1.9 3.8-3.71 4 .29.25.54.73.54 1.48v2.19c0 .21.15.46.55.38A8 8 0 0010 2z',
+                      demo: 'M3 4a1 1 0 011-1h12a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm2 1v8h10V5H5zm-2 12h14v2H3v-2z',
+                      writeup: 'M4 3h9l4 4v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2zm9 1.5V7h2.5'};
+      return icons[label] || icons.repo;
+    };
+
+    const render = () => {
+      grid.innerHTML = '';
+      PROJECTS.filter(matches).forEach(p => {
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.innerHTML = `
+          <div>
+            <h3>${p.title}</h3>
+            <p>${p.summary}</p>
+            <div class="badges">${(p.tags||[]).map(t=>`<span class="badge">${t}</span>`).join('')}</div>
+          </div>
+          <div class="links">
+            ${Object.entries(p.links||{})
+              .filter(([k,v]) => v)
+              .map(([k,v]) => `<a class="link" href="${v}" target="_blank" rel="noopener">${k}</a>`)
+              .join('')}
+          </div>`;
+        grid.appendChild(card);
+      });
+
+      if (!grid.children.length) {
+        const empty = document.createElement('div');
+        empty.className = 'card';
+        empty.innerHTML = '<div><h3>No results</h3><p>Try clearing filters or searching a different keyword.</p></div>';
+        grid.appendChild(empty);
+      }
+    };
+
+    search.addEventListener('input', (e) => { state.query = e.target.value; render(); });
+
+    renderChips();
+    render();
+  </script>
+</body>
+</html>
