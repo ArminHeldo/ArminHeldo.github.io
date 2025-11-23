@@ -29,4 +29,4 @@ Below are 10 projects that showcase my skills in data cleaning, exploratory data
   - A brief `README.md` describing the goal, methods, and key results
 
 You can always return to the main repository home from any page:  
-➡️ **[Back to Portfolio Home](README.md)**
+**[Back to Portfolio Home](README.md)**
